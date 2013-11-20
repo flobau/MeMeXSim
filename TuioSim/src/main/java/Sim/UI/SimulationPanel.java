@@ -1,17 +1,11 @@
 package Sim.UI;
 
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.BorderFactory;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
 public class SimulationPanel extends JPanel implements MouseListener {
 
@@ -20,42 +14,10 @@ public class SimulationPanel extends JPanel implements MouseListener {
 	private int x;
 	private int y;
 
-	public static void main(String[] args) {
-		try {
-			UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
-		} catch (UnsupportedLookAndFeelException ex) {
-			ex.printStackTrace();
-		} catch (IllegalAccessException ex) {
-			ex.printStackTrace();
-		} catch (InstantiationException ex) {
-			ex.printStackTrace();
-		} catch (ClassNotFoundException ex) {
-			ex.printStackTrace();
-		}
-		UIManager.put("swing.boldMetal", Boolean.FALSE);
-		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				createAndShowGUI();
-			}
-		});
-	}
-
-	private static void createAndShowGUI() {
-		JFrame frame = new JFrame("TEST");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		JComponent newContentPane = new SimulationPanel();
-		newContentPane.setOpaque(true); // content panes must be opaque
-		frame.setContentPane(newContentPane);
-		frame.pack();
-		frame.setVisible(true);
-	}
-
 	public SimulationPanel() {
 		super(new GridLayout());
 
 		addMouseListener(this);
-		setPreferredSize(new Dimension(450, 450));
-		setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 	}
 
 	public void mouseClicked(MouseEvent e) {
@@ -104,6 +66,7 @@ public class SimulationPanel extends JPanel implements MouseListener {
 
 	public void paint(Graphics g) {
 		g.drawRect(x, y, 50, 50);
+		repaint();
 	}
 	
 	public void setX(int x){

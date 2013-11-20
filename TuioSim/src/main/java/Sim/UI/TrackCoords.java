@@ -1,10 +1,8 @@
 package Sim.UI;
 
-import java.awt.Graphics;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.PointerInfo;
-import java.awt.Rectangle;
 
 public class TrackCoords {
 	
