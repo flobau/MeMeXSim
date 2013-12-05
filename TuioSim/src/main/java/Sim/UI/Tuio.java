@@ -11,10 +11,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
-public class Tuios extends Canvas implements MouseListener, MouseMotionListener {
+public class Tuio extends Canvas implements MouseListener, MouseMotionListener {
 	
-	Rectangle tuio1 = new Rectangle(0, 0, 50, 50);
-	Rectangle tuio2 = new Rectangle(0, 0, 50, 50);
+	Rectangle tuio = new Rectangle(0, 0, 50,50);
 
 	Graphics2D g2;
 
@@ -26,20 +25,20 @@ public class Tuios extends Canvas implements MouseListener, MouseMotionListener 
 
 	boolean pressOut = false;
 
-	public Tuios() {
-		setBackground(Color.white);
+	public Tuio(int x, int y) {
+		tuio.setLocation(x,y);
 		addMouseMotionListener(this);
 		addMouseListener(this);
 	}
 
 	public void mousePressed(MouseEvent e) {
-		preX = tuio1.x - e.getX();
-		preY = tuio1.y - e.getY();
+		preX = tuio.x - e.getX();
+		preY = tuio.y - e.getY();
 
-		if (tuio1.contains(e.getX(), e.getY()))
+		if (tuio.contains(e.getX(), e.getY()))
 			updateLocation(e);
 		else {
-			SimulationApplet.label.setText("Klicken Sie bitte das Viereck an!");
+			//SimulationApplet.label.setText("Klicken Sie bitte das Viereck an!");
 			pressOut = true;
 		}
 	}
@@ -47,15 +46,15 @@ public class Tuios extends Canvas implements MouseListener, MouseMotionListener 
 	public void mouseDragged(MouseEvent e) {
 		if (!pressOut)
 			updateLocation(e);
-		else
-			SimulationApplet.label.setText("Klicken Sie bitte das Viereck an!");
+		//else
+			//SimulationApplet.label.setText("Klicken Sie bitte das Viereck an!");
 	}
 
 	public void mouseReleased(MouseEvent e) {
-		if (tuio1.contains(e.getX(), e.getY()))
+		if (tuio.contains(e.getX(), e.getY()))
 			updateLocation(e);
 		else {
-			SimulationApplet.label.setText("Klicken Sie bitte das Viereck an!");
+			//SimulationApplet.label.setText("Klicken Sie bitte das Viereck an!");
 			pressOut = false;
 		}
 	}
@@ -73,12 +72,12 @@ public class Tuios extends Canvas implements MouseListener, MouseMotionListener 
 	}
 
 	public void updateLocation(MouseEvent e) {
-		tuio1.setLocation(preX + e.getX(), preY + e.getY());
+		tuio.setLocation(preX + e.getX(), preY + e.getY());
 
 		if (checkRect()) {
-			SimulationApplet.label.setText((int) tuio1.getX() + ", " +(int) tuio1.getY());
+			//SimulationApplet.label.setText((int) tuio.getX() + ", " +(int) tuio.getY());
 		} else {
-			SimulationApplet.label.setText("Zeichnen Sie bitte inerhalb der Fläche!");
+			//SimulationApplet.label.setText("Zeichnen Sie bitte inerhalb der Flï¿½che!");
 		}
 
 		repaint();
@@ -97,8 +96,6 @@ public class Tuios extends Canvas implements MouseListener, MouseMotionListener 
 
 		if (isFirstTime) {
 			area = new Rectangle(dim);
-			tuio1.setLocation(w / 2 - 100, h / 2 - 25);
-			tuio2.setLocation(w / 2 + 100, h / 2 - 25);
 			isFirstTime = false;
 		}
 
@@ -107,14 +104,9 @@ public class Tuios extends Canvas implements MouseListener, MouseMotionListener 
 		g2.fillRect(0, 0, w, h);
 
 		g2.setColor(Color.black);
-		g2.draw(tuio1);
+		g2.draw(tuio);
 		g2.setColor(Color.white);
-		g2.fill(tuio1);
-		
-		g2.setColor(Color.black);
-		g2.draw(tuio2);
-		g2.setColor(Color.white);
-		g2.fill(tuio2);
+		g2.fill(tuio);
 	}
 
 	boolean checkRect() {
@@ -122,25 +114,25 @@ public class Tuios extends Canvas implements MouseListener, MouseMotionListener 
 			return false;
 		}
 
-		if (area.contains(tuio1.x, tuio1.y, 50, 50)) {
+		if (area.contains(tuio.x, tuio.y, 50, 50)) {
 			return true;
 		}
-		int new_x = tuio1.x;
-		int new_y = tuio1.y;
+		int new_x = tuio.x;
+		int new_y = tuio.y;
 
-		if ((tuio1.x + 50) > area.getWidth()) {
+		if ((tuio.x + 50) > area.getWidth()) {
 			new_x = (int) area.getWidth() - 49;
 		}
-		if (tuio1.x < 0) {
+		if (tuio.x < 0) {
 			new_x = -1;
 		}
-		if ((tuio1.y + 50) > area.getHeight()) {
+		if ((tuio.y + 50) > area.getHeight()) {
 			new_y = (int) area.getHeight() - 49;
 		}
-		if (tuio1.y < 0) {
+		if (tuio.y < 0) {
 			new_y = -1;
 		}
-		tuio1.setLocation(new_x, new_y);
+		tuio.setLocation(new_x, new_y);
 		return false;
 	}
 }

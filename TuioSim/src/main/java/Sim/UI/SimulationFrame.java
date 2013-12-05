@@ -1,22 +1,35 @@
 package Sim.UI;
 
 import java.applet.Applet;
+import java.awt.BorderLayout;
+import java.awt.Container;
+
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class SimulationFrame extends JFrame {
+	
+	SimulationPanel panel;
+	
 
 	public static void main(String[] args) {
-		createFrame();
+		new SimulationFrame();
 	}
 
-	public static void createFrame() {
-		JFrame frame = new JFrame("MeMeX");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Applet applet = new SimulationApplet();
-		frame.add("Center", applet);
-		applet.init();
-		frame.pack();
-		frame.setSize(800, 500);
-		frame.setVisible(true);
+	public SimulationFrame() {
+		setTitle("MeMeX");
+		setSize(800, 500);
+		
+		panel = new SimulationPanel();
+		
+		
+		getContentPane().add(panel);
+		
+		
+		
+		//pack();
+		
+		setVisible(true);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 }
