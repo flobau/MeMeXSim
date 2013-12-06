@@ -1,4 +1,4 @@
-package Sim.UI;
+package Sim.Tuio;
 
 import java.awt.BasicStroke;
 import java.awt.Canvas;
@@ -77,7 +77,7 @@ public class Tuio extends Canvas implements MouseListener, MouseMotionListener {
 		if (checkRect()) {
 			//SimulationApplet.label.setText((int) tuio.getX() + ", " +(int) tuio.getY());
 		} else {
-			//SimulationApplet.label.setText("Zeichnen Sie bitte inerhalb der Fl�che!");
+			//SimulationApplet.label.setText("Zeichnen Sie bitte inerhalb der Fl???che!");
 		}
 
 		repaint();
