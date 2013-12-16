@@ -1,8 +1,8 @@
 package erkennung;
 
 public class Coordinate {
-	public int o1;
-	public int o2;
+	private int o1;
+	private int o2;
 
 	public Coordinate(int o1, int o2) {
 		this.o1 = o1;
@@ -14,11 +14,11 @@ public class Coordinate {
 		return false;
 	}
 
-	Object getFirst() {
+	int getFirst() {
 		return o1;
 	}
 
-	Object getSecond() {
+	int getSecond() {
 		return o2;
 	}
 
