@@ -3,23 +3,26 @@ package erkennung;
 import java.util.ArrayList;
 
 public class Buchstabenerkennung {
-	
-	//TODO 	Schau das der IndexOutOfBound fehler weg geht
-	//		Ich denke das lässt sich lösen wenn ich die geprüften Koordinaten lösche.
+
+	// TODO Die restlichen Direction ausprogrammieren
 
 	public ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
 	private boolean allCoordsDone = false;
-	private final String[] I = { "Nord" };
+	private final String[] I = { "North" };
 
 	public boolean check(String[] letter) {
 		ArrayList<String> parts = new ArrayList<String>();
-		int i = 0;
+		//int i = 0;
 		while (allCoordsDone == false) {
 			parts.add(getDirection(makePartsofCoordinates()));
-			i++;
+			//System.out.println(getDirection(makePartsofCoordinates()));
+			//i++;
 		}
-		if (parts.get(i) == letter[0])
+		System.out.println(parts.get(0));
+		if (parts.get(0).equals(letter[0])){
+			System.out.println("Der Buchstabe wurde richtig erkannt!");
 			return true;
+		}
 		return false;
 	}
 
@@ -44,6 +47,7 @@ public class Buchstabenerkennung {
 	}
 
 	public boolean isNorthDirection(ArrayList<Coordinate> coordinates) {
+		System.out.println(coordinates.size());
 		// Startpoint
 		Coordinate first = coordinates.get(0);
 		// Endpoint
@@ -56,10 +60,7 @@ public class Buchstabenerkennung {
 			for (int i = 1; i <= coordinates.size() - 2; i++) {
 				if (first.getSecond() <= coordinates.get(i).getSecond()
 						&& coordinates.get(i).getSecond() <= last.getSecond()) {
-					if (Math.abs(coordinates.get(i).getFirst() - average) <= 2) {
-						System.out.println("?");
-					}if(Math.abs(coordinates.get(i).getFirst() - average) > 2){
-						System.out.println("!");
+					if (Math.abs(coordinates.get(i).getFirst() - average) > 2) {
 						return false;
 					}
 				}
@@ -120,6 +121,11 @@ public class Buchstabenerkennung {
 		Coordinate c4 = new Coordinate(0, 4);
 		Coordinate c5 = new Coordinate(0, 5);
 		Coordinate c6 = new Coordinate(-1, 6);
+		Coordinate c7 = new Coordinate(1, 7);
+		Coordinate c8 = new Coordinate(0, 8);
+		Coordinate c9 = new Coordinate(0, 9);
+		Coordinate c10 = new Coordinate(1, 10);
+		Coordinate c11 = new Coordinate(-1, 11);
 
 		coordinates.add(c0);
 		coordinates.add(c1);
@@ -128,14 +134,18 @@ public class Buchstabenerkennung {
 		coordinates.add(c4);
 		coordinates.add(c5);
 		coordinates.add(c6);
+		coordinates.add(c7);
+		coordinates.add(c8);
+		coordinates.add(c9);
+		coordinates.add(c10);
+		coordinates.add(c11);
 		return coordinates;
 	}
 
 	public static void main(String[] args) {
 		Buchstabenerkennung b = new Buchstabenerkennung();
 		b.getTestCoordinates();
-		if (b.check(b.I) == true)
-			System.out.println("stimmt");
+		b.check(b.I);
 		// b.isNorthDirection(b.coordinates);
 	}
 }
