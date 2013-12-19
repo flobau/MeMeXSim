@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Buchstabenerkennung {
 
-	// TODO Die restlichen Direction ausprogrammieren
+	// TODO Die restlichen Direction ausprogrammieren!
 
 	public ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
 	private boolean allCoordsDone = false;
@@ -12,18 +12,50 @@ public class Buchstabenerkennung {
 
 	public boolean check(String[] letter) {
 		ArrayList<String> parts = new ArrayList<String>();
-		//int i = 0;
+		boolean erkannt = false;
 		while (allCoordsDone == false) {
 			parts.add(getDirection(makePartsofCoordinates()));
-			//System.out.println(getDirection(makePartsofCoordinates()));
-			//i++;
 		}
-		System.out.println(parts.get(0));
-		if (parts.get(0).equals(letter[0])){
-			System.out.println("Der Buchstabe wurde richtig erkannt!");
-			return true;
+
+		parts = orderSegments(parts);
+
+		System.out.println(parts.size());
+		System.out.println(letter.length);
+
+		// check if there is the same number of parts
+
+		if (parts.size() != letter.length)
+			return false;
+
+		for (int i = 0; i < letter.length; i++) {
+			if (parts.get(i).equals(letter[i]) == true) {
+				System.out.println("Das " + (i + 1)
+						+ ". Segment wurde richtig erkannt!");
+				erkannt = true;
+			}
+			if (parts.get(i).equals(letter[i]) == false) {
+				System.out.println("Das " + (i + 1)
+						+ ". Segment wurde falsch erkannt!");
+				erkannt = false;
+			}
 		}
-		return false;
+		return erkannt;
+	}
+
+	private ArrayList<String> orderSegments(ArrayList<String> parts) {
+		ArrayList<String> orderdparts = new ArrayList<String>();
+		String lastString = parts.get(0);
+		orderdparts.add(lastString);
+		for (int i = 1; i < parts.size(); i++) {
+			if (lastString.equals(parts.get(i))) {
+			}
+			if (lastString.equals(parts.get(i)) == false
+					&& parts.get(i).equals("Error") == false) {
+				orderdparts.add(parts.get(i));
+				lastString = parts.get(i);
+			}
+		}
+		return orderdparts;
 	}
 
 	private String getDirection(ArrayList<Coordinate> coordinates) {
@@ -47,7 +79,6 @@ public class Buchstabenerkennung {
 	}
 
 	public boolean isNorthDirection(ArrayList<Coordinate> coordinates) {
-		System.out.println(coordinates.size());
 		// Startpoint
 		Coordinate first = coordinates.get(0);
 		// Endpoint
@@ -146,6 +177,5 @@ public class Buchstabenerkennung {
 		Buchstabenerkennung b = new Buchstabenerkennung();
 		b.getTestCoordinates();
 		b.check(b.I);
-		// b.isNorthDirection(b.coordinates);
 	}
 }
