@@ -5,6 +5,15 @@
 	<artifactId>TuioSim</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+		</dependency>
+
+	</dependencies>
+
 	<properties>
 		<jdk.version>1.7</jdk.version>
 		<jacoco.version>0.6.3.201306030806</jacoco.version>

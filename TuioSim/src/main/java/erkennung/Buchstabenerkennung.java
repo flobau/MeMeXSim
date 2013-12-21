@@ -5,10 +5,10 @@ import java.util.ArrayList;
 public class Buchstabenerkennung {
 
 	// TODO Die restlichen Direction ausprogrammieren!
+	// TODO Count = 6 ist kritisch da ich selber Fehler rein mache!
 
 	public ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
 	private boolean allCoordsDone = false;
-	private final String[] I = { "North" };
 
 	public boolean check(String[] letter) {
 		ArrayList<String> parts = new ArrayList<String>();
@@ -19,8 +19,8 @@ public class Buchstabenerkennung {
 
 		parts = orderSegments(parts);
 
-		System.out.println(parts.size());
-		System.out.println(letter.length);
+		//System.out.println(parts.size());
+		// System.out.println(letter.length);
 
 		// check if there is the same number of parts
 
@@ -29,16 +29,14 @@ public class Buchstabenerkennung {
 
 		for (int i = 0; i < letter.length; i++) {
 			if (parts.get(i).equals(letter[i]) == true) {
-				System.out.println("Das " + (i + 1)
-						+ ". Segment wurde richtig erkannt!");
 				erkannt = true;
 			}
 			if (parts.get(i).equals(letter[i]) == false) {
-				System.out.println("Das " + (i + 1)
-						+ ". Segment wurde falsch erkannt!");
 				erkannt = false;
 			}
 		}
+		if (erkannt == true)
+			System.out.println("Bestanden!");
 		return erkannt;
 	}
 
@@ -79,6 +77,9 @@ public class Buchstabenerkennung {
 	}
 
 	public boolean isNorthDirection(ArrayList<Coordinate> coordinates) {
+		// Check if there are at least 2 Coordinates
+		if (coordinates.size() == 0)
+			return false;
 		// Startpoint
 		Coordinate first = coordinates.get(0);
 		// Endpoint
@@ -106,6 +107,28 @@ public class Buchstabenerkennung {
 	}
 
 	private boolean isEastDirection(ArrayList<Coordinate> coordinates) {
+		// Check if there are at least 2 Coordinates
+		if (coordinates.size() == 0)
+			return false;
+		// Startpoint
+		Coordinate first = coordinates.get(0);
+		// Endpoint
+		Coordinate last = coordinates.get(coordinates.size() - 1);
+		// The average between Start and End on the y axis.
+		double average = (first.getSecond() + last.getSecond()) / 2;
+		
+		// check if line between start and end point is east
+		if (first.getFirst() < last.getFirst()) {
+			for (int i = 1; i <= coordinates.size() - 2; i++) {
+				if (first.getFirst() <= coordinates.get(i).getFirst()
+						&& coordinates.get(i).getFirst() <= last.getFirst()) {
+					if (Math.abs(coordinates.get(i).getSecond() - average) > 2) {
+						return false;
+					}
+				}
+			}
+			return true;
+		}
 		return false;
 	}
 
@@ -114,6 +137,28 @@ public class Buchstabenerkennung {
 	}
 
 	private boolean isSouthDirection(ArrayList<Coordinate> coordinates) {
+		// Check if there are at least 2 Coordinates
+		if (coordinates.size() == 0)
+			return false;
+		// Startpoint
+		Coordinate first = coordinates.get(0);
+		// Endpoint
+		Coordinate last = coordinates.get(coordinates.size() - 1);
+		// The average between Start and End on the x axis.
+		double average = (first.getFirst() + last.getFirst()) / 2;
+
+		// check if line between start and end point is south
+		if (first.getSecond() > last.getSecond()) {
+			for (int i = 1; i <= coordinates.size() - 2; i++) {
+				if (first.getSecond() >= coordinates.get(i).getSecond()
+						&& coordinates.get(i).getSecond() >= last.getSecond()) {
+					if (Math.abs(coordinates.get(i).getFirst() - average) > 2) {
+						return false;
+					}
+				}
+			}
+			return true;
+		}
 		return false;
 	}
 
@@ -122,6 +167,28 @@ public class Buchstabenerkennung {
 	}
 
 	private boolean isWestDirection(ArrayList<Coordinate> coordinates) {
+		// Check if there are at least 2 Coordinates
+		if (coordinates.size() == 0)
+			return false;
+		// Startpoint
+		Coordinate first = coordinates.get(0);
+		// Endpoint
+		Coordinate last = coordinates.get(coordinates.size() - 1);
+		// The average between Start and End on the y axis.
+		double average = (first.getSecond() + last.getSecond()) / 2;
+		
+		// check if line between start and end point is west
+		if (first.getFirst() > last.getFirst()) {
+			for (int i = 1; i <= coordinates.size() - 2; i++) {
+				if (first.getFirst() >= coordinates.get(i).getFirst()
+						&& coordinates.get(i).getFirst() >= last.getFirst()) {
+					if (Math.abs(coordinates.get(i).getSecond() - average) > 2) {
+						return false;
+					}
+				}
+			}
+			return true;
+		}
 		return false;
 	}
 
@@ -131,8 +198,8 @@ public class Buchstabenerkennung {
 
 	public ArrayList<Coordinate> makePartsofCoordinates() {
 		ArrayList<Coordinate> part = new ArrayList<Coordinate>();
-		int count = 5;
-		if (this.coordinates.size() < 5) {
+		int count = 7;
+		if (coordinates.size() - 1 < count) {
 			count = coordinates.size() - 1;
 			allCoordsDone = true;
 		}
@@ -143,39 +210,8 @@ public class Buchstabenerkennung {
 		}
 		return part;
 	}
-
-	public ArrayList<Coordinate> getTestCoordinates() {
-		Coordinate c0 = new Coordinate(0, 0);
-		Coordinate c1 = new Coordinate(0, 1);
-		Coordinate c2 = new Coordinate(1, 2);
-		Coordinate c3 = new Coordinate(0, 3);
-		Coordinate c4 = new Coordinate(0, 4);
-		Coordinate c5 = new Coordinate(0, 5);
-		Coordinate c6 = new Coordinate(-1, 6);
-		Coordinate c7 = new Coordinate(1, 7);
-		Coordinate c8 = new Coordinate(0, 8);
-		Coordinate c9 = new Coordinate(0, 9);
-		Coordinate c10 = new Coordinate(1, 10);
-		Coordinate c11 = new Coordinate(-1, 11);
-
-		coordinates.add(c0);
-		coordinates.add(c1);
-		coordinates.add(c2);
-		coordinates.add(c3);
-		coordinates.add(c4);
-		coordinates.add(c5);
-		coordinates.add(c6);
-		coordinates.add(c7);
-		coordinates.add(c8);
-		coordinates.add(c9);
-		coordinates.add(c10);
-		coordinates.add(c11);
-		return coordinates;
-	}
-
-	public static void main(String[] args) {
-		Buchstabenerkennung b = new Buchstabenerkennung();
-		b.getTestCoordinates();
-		b.check(b.I);
+	
+	public void getCoordinates(ArrayList<Coordinate> coord){
+		this.coordinates = coord;
 	}
 }
