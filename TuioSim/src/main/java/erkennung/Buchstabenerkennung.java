@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class Buchstabenerkennung {
 
-	// TODO Die restlichen Direction ausprogrammieren!
 	// TODO Count ist kritisch da ich selber Fehler rein mache!
 	// TODO Standardt Abweichung implementieren!
 	// TODO Möglicherweiße kann man überall mit einer Geraden arbeiten
@@ -225,6 +224,35 @@ public class Buchstabenerkennung {
 	}
 
 	private boolean isSouthWestDirection(ArrayList<Coordinate> coordinates) {
+		// Check if there are at least 2 Coordinates
+		if (coordinates.size() < 2)
+			return false;
+		// Startpoint
+		Coordinate first = coordinates.get(0);
+		// Endpoint
+		Coordinate last = coordinates.get(coordinates.size() - 1);
+		// Create g ( y = m * x + q )
+		float dx = Math.abs(first.getFirst() - last.getFirst());
+		float dy = Math.abs(first.getSecond() - last.getSecond());
+		float m = dy / dx;
+		float q = first.getSecond() - m * first.getFirst();
+
+		// check if the line is southwest
+		if (first.getFirst() > last.getFirst()
+				&& first.getSecond() > last.getSecond()) {
+			for (int i = 1; i <= coordinates.size() - 2; i++) {
+				if (first.getFirst() > coordinates.get(i).getFirst()
+						&& coordinates.get(i).getFirst() > last.getFirst()
+						&& first.getSecond() > coordinates.get(i).getSecond()
+						&& coordinates.get(i).getSecond() > last.getSecond()) {
+					if (Math.abs((m * coordinates.get(i).getFirst() + q)
+							- coordinates.get(i).getSecond()) < 5) {
+						return true;
+					}
+				}
+			}
+		}
+
 		return false;
 	}
 
@@ -257,6 +285,35 @@ public class Buchstabenerkennung {
 	}
 
 	private boolean isNorthWestDirection(ArrayList<Coordinate> coordinates) {
+		// Check if there are at least 2 Coordinates
+		if (coordinates.size() < 2)
+			return false;
+		// Startpoint
+		Coordinate first = coordinates.get(0);
+		// Endpoint
+		Coordinate last = coordinates.get(coordinates.size() - 1);
+		// Create g ( y = m * x + q )
+		float dx = Math.abs(first.getFirst() - last.getFirst());
+		float dy = Math.abs(first.getSecond() - last.getSecond());
+		float m = dy / dx;
+		float q = first.getSecond() - m * first.getFirst();
+
+		// check if the line is northhwest
+		if (first.getFirst() > last.getFirst()
+				&& first.getSecond() < last.getSecond()) {
+			for (int i = 1; i <= coordinates.size() - 2; i++) {
+				if (first.getFirst() > coordinates.get(i).getFirst()
+						&& coordinates.get(i).getFirst() > last.getFirst()
+						&& first.getSecond() < coordinates.get(i).getSecond()
+						&& coordinates.get(i).getSecond() < last.getSecond()) {
+					if (Math.abs((m * coordinates.get(i).getFirst() + q)
+							- coordinates.get(i).getSecond()) < 5) {
+						return true;
+					}
+				}
+			}
+		}
+
 		return false;
 	}
 

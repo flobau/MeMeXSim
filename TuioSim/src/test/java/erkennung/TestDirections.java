@@ -96,4 +96,34 @@ public class TestDirections {
 
 		Assert.assertEquals(true, b.check(southeast));
 	}
+	
+	@Test
+	public void TestIfSouthWestWorks() {
+		ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
+		String[] southwest = { "SouthWest" };
+
+		for (int i = 1000; i >= 0; i--) {
+			coordinates.add(new Coordinate(i, i));
+		}
+
+		Buchstabenerkennung b = new Buchstabenerkennung();
+		b.getCoordinates(coordinates);
+
+		Assert.assertEquals(true, b.check(southwest));
+	}
+	
+	@Test
+	public void TestIfNorthWestWorks() {
+		ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
+		String[] northwest = { "NorthWest" };
+
+		for (int i = 1000, j = 0; j <= 1000; i--, j++) {
+			coordinates.add(new Coordinate(i, j));
+		}
+
+		Buchstabenerkennung b = new Buchstabenerkennung();
+		b.getCoordinates(coordinates);
+
+		Assert.assertEquals(true, b.check(northwest));
+	}
 }
