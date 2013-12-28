@@ -38,7 +38,7 @@ public class TestDirections {
 	}
 
 	@Test
-	public void TestIfSouthhWorks() {
+	public void TestIfSouthWorks() {
 		ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
 		String[] south = { "South" };
 

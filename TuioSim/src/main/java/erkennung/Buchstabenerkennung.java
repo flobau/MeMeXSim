@@ -4,12 +4,22 @@ import java.util.ArrayList;
 
 public class Buchstabenerkennung {
 
-	// TODO Count ist kritisch da ich selber Fehler rein mache!
-	// TODO Standardt Abweichung implementieren!
-	// TODO Möglicherweiße kann man überall mit einer Geraden arbeiten
+	/*
+	 * Standardtabweichung ist in unserem Projekt nicht möglich, da es nicht
+	 * wichtig ist, ob es sich um eine Abweichung vom Mittelwert handelt,
+	 * sondern um eine Abweichung von der Gerade, welche durch Anfang sowie
+	 * Endpunkt verläuft. Des weiteren ist es wichtig nur bei den Schrägen
+	 * Directions (NE, SE, SW, NW) Geraden zu verwenden, bei den anderen
+	 * Directions ist es gut nur zu überprüfen ob es eine zu starke Abweichung
+	 * gibt.
+	 */
 
-	public ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
+	// TODO Es muss ein minimum an Koordinaten geben sonst funktioniert count
+	// nicht!
+
+	private ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
 	private boolean allCoordsDone = false;
+	private int count;
 
 	public boolean check(String[] letter) {
 		ArrayList<String> parts = new ArrayList<String>();
@@ -18,8 +28,16 @@ public class Buchstabenerkennung {
 			parts.add(getDirection(makePartsofCoordinates()));
 		}
 
+		// for(int i = 0; i < parts.size(); i++){
+		// System.out.println(parts.get(i));
+		// }
+
 		parts = orderSegments(parts);
 
+		// for(int i = 0; i < parts.size(); i++){
+		// System.out.println(parts.get(i));
+		// }
+		//
 		// System.out.println(parts.size());
 		// System.out.println(letter.length);
 
@@ -319,7 +337,11 @@ public class Buchstabenerkennung {
 
 	public ArrayList<Coordinate> makePartsofCoordinates() {
 		ArrayList<Coordinate> part = new ArrayList<Coordinate>();
-		int count = 50;
+
+		if (count == 0) {
+			count = (int) Math.sqrt(coordinates.size());
+		}
+
 		if (coordinates.size() - 1 < count) {
 			count = coordinates.size() - 1;
 			allCoordsDone = true;
