@@ -5,13 +5,27 @@ import java.util.ArrayList;
 public class Buchstabenerkennung {
 
 	/*
-	 * Standardtabweichung ist in unserem Projekt nicht möglich, da es nicht
-	 * wichtig ist, ob es sich um eine Abweichung vom Mittelwert handelt,
-	 * sondern um eine Abweichung von der Gerade, welche durch Anfang sowie
-	 * Endpunkt verläuft. Des weiteren ist es wichtig nur bei den Schrägen
-	 * Directions (NE, SE, SW, NW) Geraden zu verwenden, bei den anderen
-	 * Directions ist es gut nur zu überprüfen ob es eine zu starke Abweichung
-	 * gibt.
+	 * WIE FUNKTIONIERT DIE ERKENNUNG? Die Erkennung funktioniert
+	 * folgendermaßen: Ich bekomme alle getrackten Coordinaten in einer
+	 * ArrayList in diese Klasse danach teile ich die Gesamtheit an Coordinaten
+	 * in kleine Teile um diese Auswerten zu können. Ein Teilbereich ist die
+	 * Wurzel der Gesamtheit. Das Auswerten geschieht in dem jede mögliche
+	 * Direction überprüft wird. Trifft es auf eine Direction zu, wird die
+	 * jeweilige Richtung als String in eine List gespeichert. Sind alle
+	 * Koordinaten verarbeitet wird die Liste mit den gespeichterten String
+	 * gekürzt, das bedeutet im Detail: South, South, South => South. Somit habe
+	 * ich die einzelnen Directions in der Liste und kann Sie mit dem zu
+	 * erreichenden Buchstaben vergleichen.
+	 */
+
+	/*
+	 * WICHTIGE ERKENNTNISSE: Standardtabweichung ist in unserem Projekt nicht
+	 * möglich, da es nicht wichtig ist, ob es sich um eine Abweichung vom
+	 * Mittelwert handelt, sondern um eine Abweichung von der Gerade, welche
+	 * durch Anfang sowie Endpunkt verläuft. Des weiteren ist es wichtig nur bei
+	 * den Schrägen Directions (NE, SE, SW, NW) Geraden zu verwenden, bei den
+	 * anderen Directions ist es gut nur zu überprüfen ob es eine zu starke
+	 * Abweichung gibt.
 	 */
 
 	// TODO Es muss ein minimum an Koordinaten geben sonst funktioniert count
@@ -28,15 +42,16 @@ public class Buchstabenerkennung {
 			parts.add(getDirection(makePartsofCoordinates()));
 		}
 
-		// for(int i = 0; i < parts.size(); i++){
-		// System.out.println(parts.get(i));
-		// }
+		for (int i = 0; i < parts.size(); i++) {
+			System.out.println(parts.get(i));
+		}
 
 		parts = orderSegments(parts);
 
-		// for(int i = 0; i < parts.size(); i++){
-		// System.out.println(parts.get(i));
-		// }
+		System.out.println("*****");
+		for (int i = 0; i < parts.size(); i++) {
+			System.out.println(parts.get(i));
+		}
 		//
 		// System.out.println(parts.size());
 		// System.out.println(letter.length);
@@ -52,6 +67,7 @@ public class Buchstabenerkennung {
 			}
 			if (parts.get(i).equals(letter[i]) == false) {
 				erkannt = false;
+				return erkannt;
 			}
 		}
 		return erkannt;
@@ -62,8 +78,6 @@ public class Buchstabenerkennung {
 		String lastString = parts.get(0);
 		orderdparts.add(lastString);
 		for (int i = 1; i < parts.size(); i++) {
-			if (lastString.equals(parts.get(i))) {
-			}
 			if (lastString.equals(parts.get(i)) == false
 					&& parts.get(i).equals("Error") == false) {
 				orderdparts.add(parts.get(i));
@@ -105,9 +119,9 @@ public class Buchstabenerkennung {
 		double average = (first.getFirst() + last.getFirst()) / 2;
 
 		// check if line between start and end point is north
-		if (first.getSecond() < last.getSecond()
-				&& (last.getSecond() - first.getSecond()) < 50
-				&& (Math.abs(first.getFirst() - last.getFirst())) < 5) {
+		if (first.getSecond() <= last.getSecond()
+				&& (last.getSecond() - first.getSecond()) < count
+				&& (Math.abs(first.getFirst() - last.getFirst())) < Math.sqrt(count)) {
 			for (int i = 1; i <= coordinates.size() - 2; i++) {
 				if (first.getSecond() <= coordinates.get(i).getSecond()
 						&& coordinates.get(i).getSecond() <= last.getSecond()) {
@@ -225,8 +239,8 @@ public class Buchstabenerkennung {
 		double average = (first.getFirst() + last.getFirst()) / 2;
 
 		// check if line between start and end point is south
-		if (first.getSecond() > last.getSecond()
-				&& (first.getSecond() - last.getSecond() < 50)
+		if (first.getSecond() >= last.getSecond()
+				&& (first.getSecond() - last.getSecond() < count)
 				&& (Math.abs(first.getFirst() - last.getFirst())) < 2) {
 			for (int i = 1; i <= coordinates.size() - 2; i++) {
 				if (first.getSecond() >= coordinates.get(i).getSecond()
