@@ -39,6 +39,7 @@ public class Game {
 			}
 		}
 		this.playfield = field;
+		PlayField playField = new PlayField(height, width);
 	}
 
 	public String openCard(int height, int width) {
@@ -78,7 +79,7 @@ public class Game {
 	}
 
 	public void initGame() {
-		buildField(2, 2);
+		buildField(4, 4);
 		player1 = new Player();
 		player2 = new Player();
 		player2.setCard1("*");
