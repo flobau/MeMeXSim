@@ -39,14 +39,12 @@ public class Game {
 			}
 		}
 		this.playfield = field;
-		PlayField playField = new PlayField(height, width);
+		PlayField pplayField = new PlayField(height, width, this);
 	}
 
-	public String openCard(int height, int width) {
+	public void openCard(int height, int width) {
 		String letter = playfield[height][width];
-
 		System.out.println(letter);
-		return letter;
 	}
 
 	public void initHashMap() {
@@ -84,7 +82,7 @@ public class Game {
 		player2 = new Player();
 		player2.setCard1("*");
 		player2.setCard2("*");
-		startGame();
+		//startGame();
 	}
 
 	private void startGame() {

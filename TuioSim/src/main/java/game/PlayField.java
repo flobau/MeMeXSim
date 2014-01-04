@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
 
 public class PlayField extends JFrame implements MouseMotionListener,
-		MouseListener {
+		MouseListener, KeyListener {
 
 	private int reihen = 0;
 	private int spalten = 0;
@@ -15,8 +15,9 @@ public class PlayField extends JFrame implements MouseMotionListener,
 	private int difX;
 	private int difY;
 	private boolean pressOut = false;
+	private Game game;
 
-	public PlayField(int reihen, int spalten) {
+	public PlayField(int reihen, int spalten, Game game) {
 		setTitle("MemeX");
 		setSize(450, 450);
 		setVisible(true);
@@ -24,8 +25,10 @@ public class PlayField extends JFrame implements MouseMotionListener,
 		this.reihen = reihen;
 		this.spalten = spalten;
 		this.tuio = new Rectangle(reihen * 50 + 5, spalten * 50 + 5, 40, 40);
+		this.game = game;
 		addMouseListener(this);
 		addMouseMotionListener(this);
+		addKeyListener(this);
 	}
 
 	public void paint(Graphics g) {
@@ -50,7 +53,7 @@ public class PlayField extends JFrame implements MouseMotionListener,
 
 		// Stellt das TUIO dar.
 		Graphics2D g2 = (Graphics2D) g;
-		g2.setStroke(new BasicStroke(2.0f));
+		g2.setStroke(new BasicStroke(4.0f));
 
 		g2.setPaint(Color.white);
 		g2.clearRect(0, 0, 0, 0);
@@ -62,7 +65,20 @@ public class PlayField extends JFrame implements MouseMotionListener,
 
 	}
 
-	public void mouseClicked(MouseEvent e) {
+	public void updateLocation(MouseEvent e) {
+		tuio.setLocation(difX + e.getX(), difY + e.getY());
+		repaint();
+	}
+	
+	public boolean isOnCard(){
+		for(int i = 0; i <= 4; i++){
+			for(int j = 0; j <= 4; j++){
+				if(tuio.contains((i*100+75),(j*100+75))){
+					game.openCard(i, j);
+				}
+			}
+		}
+		return false;
 	}
 
 	public void mousePressed(MouseEvent e) {
@@ -90,6 +106,15 @@ public class PlayField extends JFrame implements MouseMotionListener,
 		}
 	}
 
+	public void keyPressed(KeyEvent e) {
+		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+			isOnCard();
+		}
+	}
+
+	public void mouseClicked(MouseEvent e) {
+	}
+
 	public void mouseMoved(MouseEvent e) {
 	}
 
@@ -99,8 +124,9 @@ public class PlayField extends JFrame implements MouseMotionListener,
 	public void mouseExited(MouseEvent e) {
 	}
 
-	public void updateLocation(MouseEvent e) {
-		tuio.setLocation(difX + e.getX(), difY + e.getY());
-		repaint();
+	public void keyTyped(KeyEvent e) {
+	}
+
+	public void keyReleased(KeyEvent e) {
 	}
 }
