@@ -2,13 +2,13 @@ package game;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
 
-import javax.swing.JFrame;
+import javax.swing.*;
 
 public class PlayField extends JFrame implements MouseMotionListener,
 		MouseListener, KeyListener {
 
+	private static final long serialVersionUID = -7659520829139104409L;
 	private int reihen = 0;
 	private int spalten = 0;
 	private Rectangle tuio;
@@ -69,11 +69,11 @@ public class PlayField extends JFrame implements MouseMotionListener,
 		tuio.setLocation(difX + e.getX(), difY + e.getY());
 		repaint();
 	}
-	
-	public boolean isOnCard(){
-		for(int i = 0; i <= 4; i++){
-			for(int j = 0; j <= 4; j++){
-				if(tuio.contains((i*100+75),(j*100+75))){
+
+	public boolean isOnCard() {
+		for (int i = 0; i <= 4; i++) {
+			for (int j = 0; j <= 4; j++) {
+				if (tuio.contains((i * 100 + 75), (j * 100 + 75))) {
 					game.openCard(i, j);
 				}
 			}

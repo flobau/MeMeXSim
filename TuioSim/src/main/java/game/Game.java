@@ -9,7 +9,7 @@ import erkennung.Buchstabenerkennung;
 
 //- [ ] Es können noch mehrere gleiche Buchstaben am Spielfeld sein.
 //- [ ] OpenCard fertig implementieren
-//- [ ] Quasi ActionListener für das 90° Drehen
+//- [x] Quasi ActionListener für das 90° Drehen
 public class Game {
 
 	private HashMap<String, String[]> letters = new HashMap<String, String[]>();
@@ -39,11 +39,13 @@ public class Game {
 			}
 		}
 		this.playfield = field;
+		@SuppressWarnings("unused")
 		PlayField pplayField = new PlayField(height, width, this);
 	}
 
 	public void openCard(int height, int width) {
 		String letter = playfield[height][width];
+		setCards(letter);
 		System.out.println(letter);
 	}
 
@@ -82,23 +84,17 @@ public class Game {
 		player2 = new Player();
 		player2.setCard1("*");
 		player2.setCard2("*");
-		//startGame();
 	}
 
-	private void startGame() {
-		String x = "";
-		while (theGameIsRunning) {
+	private void setCards(String card) {
+		if(!player1.getCard1().equals("*")){
+			player1.setCard1(card);
 		}
-
 	}
-	
+
 	public static void main(String[] args) {
 		Game g = new Game();
 		g.initGame();
-		// g.openCard(0, 0);
-		// g.openCard(0, 1);
-		// g.openCard(1, 0);
-		// g.openCard(1, 1);
 	}
 
 }

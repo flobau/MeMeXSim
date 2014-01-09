@@ -6,8 +6,8 @@ public class Player {
 	private int score;
 	
 	public Player(){
-		this.card1 = null;
-		this.card2 = null;
+		this.card1 = "";
+		this.card2 = "";
 		this.score = 0;
 	}
 
