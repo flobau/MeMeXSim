@@ -2,17 +2,17 @@ package game;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Random;
 
+import vorzeichnen.PrintField;
 import erkennung.Buchstabenerkennung;
 
 //- [ ] Es können noch mehrere gleiche Buchstaben am Spielfeld sein.
-//- [ ] OpenCard fertig implementieren
+//- [x] OpenCard fertig implementieren
 //- [x] Quasi ActionListener für das 90° Drehen
+//- [ ] ZeichneLetter implementieren
 public class Game {
 
-	private HashMap<String, String[]> letters = new HashMap<String, String[]>();
 	private String[][] playfield;
 	Buchstabenerkennung b = new Buchstabenerkennung();
 	boolean theGameIsRunning = true;
@@ -39,57 +39,64 @@ public class Game {
 			}
 		}
 		this.playfield = field;
-		@SuppressWarnings("unused")
-		PlayField pplayField = new PlayField(height, width, this);
+		new PlayField(height, width, this);
 	}
 
 	public void openCard(int height, int width) {
 		String letter = playfield[height][width];
 		setCards(letter);
-		System.out.println(letter);
-	}
-
-	public void initHashMap() {
-		letters.put("A", new String[] { "Error" });
-		letters.put("B", new String[] { "Error" });
-		letters.put("C", new String[] { "Error" });
-		letters.put("D", new String[] { "Error" });
-		letters.put("E", new String[] { "Error" });
-		letters.put("F", new String[] { "Error" });
-		letters.put("G", new String[] { "Error" });
-		letters.put("H", new String[] { "Error" });
-		letters.put("I", new String[] { "Error" });
-		letters.put("J", new String[] { "Error" });
-		letters.put("K", new String[] { "Error" });
-		letters.put("L", new String[] { "Error" });
-		letters.put("M", new String[] { "Error" });
-		letters.put("N", new String[] { "Error" });
-		letters.put("O", new String[] { "Error" });
-		letters.put("P", new String[] { "Error" });
-		letters.put("Q", new String[] { "Error" });
-		letters.put("R", new String[] { "Error" });
-		letters.put("S", new String[] { "Error" });
-		letters.put("T", new String[] { "Error" });
-		letters.put("U", new String[] { "Error" });
-		letters.put("V", new String[] { "Error" });
-		letters.put("W", new String[] { "Error" });
-		letters.put("X", new String[] { "Error" });
-		letters.put("Y", new String[] { "Error" });
-		letters.put("Z", new String[] { "Error" });
+		new PrintField(letter, this);
+		printPlayerCards();
 	}
 
 	public void initGame() {
 		buildField(4, 4);
 		player1 = new Player();
 		player2 = new Player();
+		player1.setCard1("*");
+		player1.setCard2("*");
 		player2.setCard1("*");
 		player2.setCard2("*");
 	}
 
 	private void setCards(String card) {
-		if(!player1.getCard1().equals("*")){
+		if (player1.getCard1().equals("*")) {
 			player1.setCard1(card);
+		} else {
+			if (player1.getCard2().equals("*")) {
+				player1.setCard2(card);
+				if (player1.getCard1().equals(player1.getCard2())) {
+					//zwei gleiche
+					playerPrintLetter();
+					player1.setCard1("*");
+					player1.setCard2("*");
+				} else {
+					player2.setCard1("*");
+					player2.setCard2("*");
+				}
+			} else {
+				if (player2.getCard1().equals("*")) {
+					player2.setCard1(card);
+				} else {
+					if (player2.getCard2().equals("*")) {
+						player2.setCard2(card);
+						if (player2.getCard1().equals(player2.getCard2())) {
+							//zwei gleiche
+							playerPrintLetter();
+							player2.setCard1("*");
+							player2.setCard2("*");
+						} else {
+							player1.setCard1("*");
+							player1.setCard2("*");
+						}
+					}
+				}
+			}
 		}
+	}
+
+	public boolean playerPrintLetter() {
+		return false;
 	}
 
 	public static void main(String[] args) {
@@ -97,4 +104,10 @@ public class Game {
 		g.initGame();
 	}
 
+	public void printPlayerCards() {
+		System.out.println("Player 1 / Card 1 : " + player1.getCard1());
+		System.out.println("Player 1 / Card 2 : " + player1.getCard2());
+		System.out.println("Player 2 / Card 1 : " + player2.getCard1());
+		System.out.println("Player 2 / Card 2 : " + player2.getCard2());
+	}
 }
