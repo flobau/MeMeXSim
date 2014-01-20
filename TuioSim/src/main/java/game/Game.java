@@ -8,8 +8,6 @@ import vorzeichnen.PrintField;
 import erkennung.Buchstabenerkennung;
 
 //- [ ] Es können noch mehrere gleiche Buchstaben am Spielfeld sein.
-//- [x] OpenCard fertig implementieren
-//- [x] Quasi ActionListener für das 90° Drehen
 //- [ ] ZeichneLetter implementieren
 public class Game {
 
