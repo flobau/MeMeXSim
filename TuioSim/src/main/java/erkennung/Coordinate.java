@@ -8,25 +8,29 @@ public class Coordinate {
 		this.o1 = o1;
 		this.o2 = o2;
 	}
+	
+	public Coordinate(){
+		
+	}
 
 	public static boolean same(int o1, int o2) {
 		if(Math.abs(o1)-Math.abs(o2) == 0) return true;
 		return false;
 	}
 
-	int getFirst() {
+	public int getFirst() {
 		return o1;
 	}
 
-	int getSecond() {
+	public int getSecond() {
 		return o2;
 	}
 
-	void setFirst(int o) {
+	public void setFirst(int o) {
 		o1 = o;
 	}
 
-	void setSecond(int o) {
+	public void setSecond(int o) {
 		o2 = o;
 	}
 

@@ -1,5 +1,6 @@
 package vorzeichnen;
 
+import erkennung.Coordinate;
 import game.Game;
 
 import java.awt.BasicStroke;
@@ -7,24 +8,32 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 
-public class PrintField extends JFrame {
+//- [x] Verschieben des Rectangle ermöglichen
+public class PrintField extends JFrame implements KeyListener {
 
-	private String letter = "";
+	private static final long serialVersionUID = 119678133234225947L;
 	private Game game;
+	private BuchstabenErstellung bs = new BuchstabenErstellung();
 	private Rectangle tuio;
+	private ArrayList<Coordinate> coordinates;
 
 	public PrintField(String letter, Game g) {
-		setTitle("PrintField");
+		setTitle("Hier wird Vorgezeichnet");
 		setSize(450, 450);
 		setLocation(450, 0);
 		setVisible(true);
-		this.letter = letter;
+		addKeyListener(this);
 		this.game = g;
-		this.tuio = new Rectangle(4 * 50 + 5, 4 * 50 + 5, 40, 40);
+		Coordinate c = bs.getConfigStartPosition('I');
+		coordinates = bs.buildLetter(bs.getConfigLetter('I'),
+				bs.getConfigStartPosition('I'));
+		this.tuio = new Rectangle(c.getFirst(), c.getSecond(), 40, 40);
 	}
 
 	public void paint(Graphics g) {
@@ -45,5 +54,24 @@ public class PrintField extends JFrame {
 		g2.setColor(Color.white);
 		g2.fill(tuio);
 
+	}
+
+	public void keyPressed(KeyEvent e) {
+		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+			// System.out.println("SPACE");
+			if (coordinates.size() > 1) {
+				tuio.setLocation(coordinates.get(0).getFirst(), coordinates
+						.get(0).getSecond());
+				repaint();
+				coordinates.remove(0);
+			}
+		}
+
+	}
+
+	public void keyReleased(KeyEvent e) {
+	}
+
+	public void keyTyped(KeyEvent e) {
 	}
 }
