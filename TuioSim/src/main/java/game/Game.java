@@ -15,9 +15,9 @@ public class Game {
 
 	private String[][] playfield;
 	Buchstabenerkennung b = new Buchstabenerkennung();
-	boolean theGameIsRunning = true;
 	Player player1;
 	Player player2;
+	ScoreField sf = null;
 
 	public void buildField(int height, int width) {
 		String[][] field = new String[height][width];
@@ -45,8 +45,9 @@ public class Game {
 	public void openCard(int height, int width) {
 		String letter = playfield[height][width];
 		setCards(letter);
+		sf.setKarte(letter);
 		new PrintField(letter, this);
-		printPlayerCards();
+		// printPlayerCards();
 	}
 
 	public void initGame() {
@@ -57,6 +58,7 @@ public class Game {
 		player1.setCard2("*");
 		player2.setCard1("*");
 		player2.setCard2("*");
+		sf = new ScoreField(this);
 	}
 
 	private void setCards(String card) {
@@ -66,7 +68,7 @@ public class Game {
 			if (player1.getCard2().equals("*")) {
 				player1.setCard2(card);
 				if (player1.getCard1().equals(player1.getCard2())) {
-					//zwei gleiche
+					// zwei gleiche
 					playerPrintLetter();
 					player1.setCard1("*");
 					player1.setCard2("*");
@@ -81,7 +83,7 @@ public class Game {
 					if (player2.getCard2().equals("*")) {
 						player2.setCard2(card);
 						if (player2.getCard1().equals(player2.getCard2())) {
-							//zwei gleiche
+							// zwei gleiche
 							playerPrintLetter();
 							player2.setCard1("*");
 							player2.setCard2("*");
@@ -99,15 +101,16 @@ public class Game {
 		return false;
 	}
 
-	public static void main(String[] args) {
-		Game g = new Game();
-		g.initGame();
-	}
-
+	// Nur zu Testzwecken!
 	public void printPlayerCards() {
 		System.out.println("Player 1 / Card 1 : " + player1.getCard1());
 		System.out.println("Player 1 / Card 2 : " + player1.getCard2());
 		System.out.println("Player 2 / Card 1 : " + player2.getCard1());
 		System.out.println("Player 2 / Card 2 : " + player2.getCard2());
+	}
+
+	public static void main(String[] args) {
+		Game g = new Game();
+		g.initGame();
 	}
 }

@@ -29,7 +29,7 @@ public class PrintField extends JFrame implements KeyListener {
 		setLocation(450, 0);
 		setVisible(true);
 		addKeyListener(this);
-		this.game = g;
+		this.setGame(g);
 		Coordinate c = bs.getConfigStartPosition('I');
 		coordinates = bs.buildLetter(bs.getConfigLetter('I'),
 				bs.getConfigStartPosition('I'));
@@ -64,6 +64,9 @@ public class PrintField extends JFrame implements KeyListener {
 						.get(0).getSecond());
 				repaint();
 				coordinates.remove(0);
+			} else {
+				setVisible(false);
+				dispose();
 			}
 		}
 
@@ -73,5 +76,13 @@ public class PrintField extends JFrame implements KeyListener {
 	}
 
 	public void keyTyped(KeyEvent e) {
+	}
+
+	public Game getGame() {
+		return game;
+	}
+
+	public void setGame(Game game) {
+		this.game = game;
 	}
 }

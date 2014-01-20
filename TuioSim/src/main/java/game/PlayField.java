@@ -16,6 +16,7 @@ public class PlayField extends JFrame implements MouseMotionListener,
 	private int difY;
 	private boolean pressOut = false;
 	private Game game;
+	private boolean madeAction = false;
 
 	public PlayField(int reihen, int spalten, Game game) {
 		setTitle("MemeX");
@@ -71,10 +72,12 @@ public class PlayField extends JFrame implements MouseMotionListener,
 	}
 
 	public boolean isOnCard() {
-		for (int i = 0; i <= 4; i++) {
-			for (int j = 0; j <= 4; j++) {
-				if (tuio.contains((i * 100 + 75), (j * 100 + 75))) {
-					game.openCard(i, j);
+		if (madeAction) {
+			for (int i = 0; i <= 4; i++) {
+				for (int j = 0; j <= 4; j++) {
+					if (tuio.contains((i * 100 + 75), (j * 100 + 75))) {
+						game.openCard(i, j);
+					}
 				}
 			}
 		}
@@ -90,6 +93,8 @@ public class PlayField extends JFrame implements MouseMotionListener,
 		} else {
 			pressOut = true;
 		}
+
+		madeAction = true;
 	}
 
 	public void mouseReleased(MouseEvent e) {
@@ -98,18 +103,24 @@ public class PlayField extends JFrame implements MouseMotionListener,
 		} else {
 			pressOut = true;
 		}
+
+		madeAction = true;
 	}
 
 	public void mouseDragged(MouseEvent e) {
 		if (!pressOut) {
 			updateLocation(e);
 		}
+
+		madeAction = true;
 	}
 
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 			isOnCard();
 		}
+
+		madeAction = false;
 	}
 
 	public void mouseClicked(MouseEvent e) {
