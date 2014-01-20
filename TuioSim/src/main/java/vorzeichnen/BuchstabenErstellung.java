@@ -18,12 +18,14 @@ public class BuchstabenErstellung {
 		try {
 			FileReader fr = new FileReader("letterConfig.txt");
 			BufferedReader br = new BufferedReader(fr);
-			String line = br.readLine();
-			if (line.charAt(0) == letter) {
-				line = (String) line.subSequence(11, line.length());
-				a = line.split("/");
+			for (int i = 0; i < 26; i++) {
+				String line = br.readLine();
+				if (line.charAt(0) == letter) {
+					line = (String) line.subSequence(11, line.length());
+					a = line.split("/");
+					br.close();
+				}
 			}
-			br.close();
 		} catch (IOException e) {
 
 		}
@@ -37,14 +39,16 @@ public class BuchstabenErstellung {
 			BufferedReader br = new BufferedReader(fr);
 			c = new Coordinate();
 			String[] a = null;
-			String line = br.readLine();
-			if (line.charAt(0) == letter) {
-				line = (String) line.subSequence(3, 10);
-				a = line.split("/");
-				c.setFirst(Integer.parseInt(a[0]));
-				c.setSecond(Integer.parseInt(a[1]));
+			for (int i = 0; i < 26; i++) {
+				String line = br.readLine();
+				if (line.charAt(0) == letter) {
+					line = (String) line.subSequence(3, 10);
+					a = line.split("/");
+					c.setFirst(Integer.parseInt(a[0]));
+					c.setSecond(Integer.parseInt(a[1]));
+					br.close();
+				}
 			}
-			br.close();
 		} catch (IOException e) {
 		}
 		return c;
@@ -55,10 +59,71 @@ public class BuchstabenErstellung {
 		Coordinate lastcoord = c;
 		Coordinate newcoord = lastcoord;
 		for (int i = 0; i < a.length; i++) {
+			if (a[i].equals("N")) {
+				for (int j = 0; j < 10; j++) {
+					newcoord.setSecond(lastcoord.getSecond() - 3);
+					coordinates.add(new Coordinate(newcoord.getFirst(),
+							newcoord.getSecond()));
+					lastcoord = newcoord;
+				}
+			}
+			if (a[i].equals("E")) {
+				for (int j = 0; j < 10; j++) {
+					newcoord.setFirst(lastcoord.getFirst() + 3);
+					coordinates.add(new Coordinate(newcoord.getFirst(),
+							newcoord.getSecond()));
+					lastcoord = newcoord;
+				}
+			}
 			if (a[i].equals("S")) {
 				for (int j = 0; j < 10; j++) {
 					newcoord.setSecond(lastcoord.getSecond() + 3);
-					coordinates.add(new Coordinate(newcoord.getFirst(), newcoord.getSecond()));
+					coordinates.add(new Coordinate(newcoord.getFirst(),
+							newcoord.getSecond()));
+					lastcoord = newcoord;
+				}
+			}
+			if (a[i].equals("W")) {
+				for (int j = 0; j < 10; j++) {
+					newcoord.setFirst(lastcoord.getFirst() - 3);
+					coordinates.add(new Coordinate(newcoord.getFirst(),
+							newcoord.getSecond()));
+					lastcoord = newcoord;
+				}
+			}
+			if (a[i].equals("NE")) {
+				for (int j = 0; j < 10; j++) {
+					newcoord.setFirst(lastcoord.getFirst() + 3);
+					newcoord.setSecond(lastcoord.getSecond() - 3);
+					coordinates.add(new Coordinate(newcoord.getFirst(),
+							newcoord.getSecond()));
+					lastcoord = newcoord;
+				}
+			}
+			if (a[i].equals("SE")) {
+				for (int j = 0; j < 10; j++) {
+					newcoord.setFirst(lastcoord.getFirst() + 3);
+					newcoord.setSecond(lastcoord.getSecond() + 3);
+					coordinates.add(new Coordinate(newcoord.getFirst(),
+							newcoord.getSecond()));
+					lastcoord = newcoord;
+				}
+			}
+			if (a[i].equals("SW")) {
+				for (int j = 0; j < 10; j++) {
+					newcoord.setFirst(lastcoord.getFirst() - 3);
+					newcoord.setSecond(lastcoord.getSecond() + 3);
+					coordinates.add(new Coordinate(newcoord.getFirst(),
+							newcoord.getSecond()));
+					lastcoord = newcoord;
+				}
+			}
+			if (a[i].equals("NW")) {
+				for (int j = 0; j < 10; j++) {
+					newcoord.setFirst(lastcoord.getFirst() - 3);
+					newcoord.setSecond(lastcoord.getSecond() - 3);
+					coordinates.add(new Coordinate(newcoord.getFirst(),
+							newcoord.getSecond()));
 					lastcoord = newcoord;
 				}
 			}
