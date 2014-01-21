@@ -1,3 +1,5 @@
+A#
+B#
 C# 300/075 NW/W/W/W/SW/SW/S/S/S/S/S/S/S/SE/SE/E/E/NE
 D# 100/100 N/N/N/N/N/N/N/N/N/N
 I# 205/055 S/S/S/S/S/S/S/S/S/S
