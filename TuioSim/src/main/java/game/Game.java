@@ -42,9 +42,9 @@ public class Game {
 
 	public void openCard(int height, int width) {
 		String letter = playfield[height][width];
+		new PrintField(letter, this);
 		setCards(letter);
 		sf.setKarte(letter);
-		new PrintField(letter, this);
 		// printPlayerCards();
 	}
 
@@ -57,10 +57,12 @@ public class Game {
 		player2.setCard1("*");
 		player2.setCard2("*");
 		sf = new ScoreField(this);
+		sf.setStatus("Bewegen Sie das TUIO auf eine Karte und drücken Sie SPACE");
 	}
 
 	private void setCards(String card) {
 		if (player1.getCard1().equals("*")) {
+			sf.setPlayer("1");
 			player1.setCard1(card);
 		} else {
 			if (player1.getCard2().equals("*")) {
@@ -76,6 +78,7 @@ public class Game {
 				}
 			} else {
 				if (player2.getCard1().equals("*")) {
+					sf.setPlayer("2");
 					player2.setCard1(card);
 				} else {
 					if (player2.getCard2().equals("*")) {
