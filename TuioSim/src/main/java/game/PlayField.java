@@ -5,6 +5,7 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
+//- [ ] Lösung für das hinaus Klicken einfallen lassen.
 public class PlayField extends JFrame implements MouseMotionListener,
 		MouseListener, KeyListener {
 
@@ -14,7 +15,6 @@ public class PlayField extends JFrame implements MouseMotionListener,
 	private Rectangle tuio;
 	private int difX;
 	private int difY;
-	private boolean pressOut = false;
 	private Game game;
 	private boolean madeAction = false;
 
@@ -90,28 +90,19 @@ public class PlayField extends JFrame implements MouseMotionListener,
 
 		if (tuio.contains(e.getX(), e.getY())) {
 			updateLocation(e);
-		} else {
-			pressOut = true;
 		}
-
 		madeAction = true;
 	}
 
 	public void mouseReleased(MouseEvent e) {
 		if (tuio.contains(e.getX(), e.getY())) {
 			updateLocation(e);
-		} else {
-			pressOut = true;
 		}
-
 		madeAction = true;
 	}
 
 	public void mouseDragged(MouseEvent e) {
-		if (!pressOut) {
-			updateLocation(e);
-		}
-
+		updateLocation(e);
 		madeAction = true;
 	}
 
