@@ -7,7 +7,7 @@ import java.util.Random;
 import vorzeichnen.PrintField;
 import erkennung.Buchstabenerkennung;
 
-//- [ ] Es können noch mehrere gleiche Buchstaben am Spielfeld sein.
+//- [x] Es können noch mehrere gleiche Buchstaben am Spielfeld sein.
 //- [ ] ZeichneLetter implementieren
 public class Game {
 
@@ -20,13 +20,29 @@ public class Game {
 	public void buildField(int height, int width) {
 		String[][] field = new String[height][width];
 		String[] list = new String[height * width];
+		boolean onetime = false;
+		boolean done = false;
 		for (int i = 0; i < (height * width); i++) {
 			Random r = new Random();
 			char c = (char) (r.nextInt(26) + 'a');
 			String d = "" + c;
-			list[i] = d.toUpperCase();
-			list[i + 1] = d.toUpperCase();
-			i++;
+			done = false;
+			for (int j = 0; j <= i; j++) {
+				if (i >= 2 && done == false) {
+					if (!list[j].equals(d)) {
+						list[i] = d.toUpperCase();
+						list[i + 1] = d.toUpperCase();
+						done = true;
+						i++;
+					}
+				}
+				if (onetime == false) {
+					list[i] = d.toUpperCase();
+					list[i + 1] = d.toUpperCase();
+					onetime = true;
+					i++;
+				}
+			}
 		}
 		Collections.shuffle(Arrays.asList(list));
 		int s = 0;
@@ -45,7 +61,7 @@ public class Game {
 		new PrintField(letter, this);
 		setCards(letter);
 		sf.setKarte(letter);
-		// printPlayerCards();
+		printPlayerCards();
 	}
 
 	public void initGame() {
