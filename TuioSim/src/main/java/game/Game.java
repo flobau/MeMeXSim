@@ -16,6 +16,14 @@ public class Game {
 	Player player2;
 	ScoreField sf = null;
 
+	/**
+	 * buildField erstellt mir die logischen Karten am Spielfeld, dabei
+	 * wird darauf geachtet, dass jedes Buchstabenpaar nur einmal vorkommen
+	 * darf. Danach wird alles geshuffelt und in einer Liste gespeichert.
+	 * @param height
+	 * @param width
+	 * Die beiden Parameter geben die Kartenanzahl an
+	 */
 	public void buildField(int height, int width) {
 		String[][] field = new String[height][width];
 		String[] list = new String[height * width];
@@ -55,6 +63,12 @@ public class Game {
 		new PlayField(height, width, this);
 	}
 
+	/**
+	 * Deckt die jeweilige Karte (Breite und Länge) auf und setzt
+	 * sie bei dem jeweiligen Spieler der gerade an der Reihe ist.
+	 * @param height
+	 * @param width
+	 */
 	public void openCard(int height, int width) {
 		String letter = playfield[height][width];
 		new PrintField(letter, this);
@@ -63,6 +77,10 @@ public class Game {
 		printPlayerCards();
 	}
 
+	/**
+	 * Diese Methode wird aufgerufen wenn das Spiel gestartet wird.
+	 * Es wird das Spielfeld gebaut und die Spieler initialisiert.
+	 */
 	public void initGame() {
 		buildField(4, 4);
 		player1 = new Player();
@@ -75,6 +93,11 @@ public class Game {
 		sf.setStatus("Bewegen Sie das TUIO auf eine Karte und drücken Sie SPACE");
 	}
 
+	/**
+	 * Die Methode setzt dem Spieler der gerade an der Reihe ist
+	 * die Karte welche dieser aufgedeckt hat.
+	 * @param card
+	 */
 	private void setCards(String card) {
 		if (player1.getCard1().equals("*")) {
 			sf.setPlayer("1");
@@ -115,6 +138,10 @@ public class Game {
 		}
 	}
 
+	/**
+	 * Wird ausgeführt wenn ein Spieler zwei gleiche Karten aufdeckt.
+	 * @return
+	 */
 	public boolean playerPrintLetter() {
 		new InputField(this);
 		return false;
