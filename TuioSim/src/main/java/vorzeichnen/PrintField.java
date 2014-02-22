@@ -65,6 +65,7 @@ public class PrintField extends JFrame implements KeyListener {
 				coordinates.remove(0);
 			} else {
 				setVisible(false);
+				game.setLetterFertigGezeichnet();
 				dispose();
 			}
 		}
