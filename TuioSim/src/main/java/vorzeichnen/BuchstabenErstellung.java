@@ -16,7 +16,7 @@ public class BuchstabenErstellung {
 	public String[] getConfigLetter(char letter) {
 		String[] a = null;
 		try {
-			FileReader fr = new FileReader("letterConfig.txt");
+			FileReader fr = new FileReader("src/main/resources/letterConfig.txt");
 			BufferedReader br = new BufferedReader(fr);
 			for (int i = 0; i < 26; i++) {
 				String line = br.readLine();
@@ -35,7 +35,7 @@ public class BuchstabenErstellung {
 	public Coordinate getConfigStartPosition(char letter) {
 		Coordinate c = null;
 		try {
-			FileReader fr = new FileReader("letterConfig.txt");
+			FileReader fr = new FileReader("src/main/resources/letterConfig.txt");
 			BufferedReader br = new BufferedReader(fr);
 			c = new Coordinate();
 			String[] a = null;
