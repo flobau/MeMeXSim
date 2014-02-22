@@ -28,9 +28,6 @@ public class Buchstabenerkennung {
 	 * Abweichung gibt.
 	 */
 
-	// TODO Es muss ein minimum an Koordinaten geben sonst funktioniert count
-	// nicht!
-
 	private ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
 	private boolean allCoordsDone = false;
 	private int count;

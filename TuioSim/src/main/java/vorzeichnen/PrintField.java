@@ -14,7 +14,6 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
-//- [x] Verschieben des Rectangle ermöglichen
 public class PrintField extends JFrame implements KeyListener {
 
 	private static final long serialVersionUID = 119678133234225947L;

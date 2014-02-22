@@ -6,9 +6,8 @@ import java.util.Random;
 
 import vorzeichnen.PrintField;
 import erkennung.Buchstabenerkennung;
+import erkennung.InputField;
 
-//- [x] Es können noch mehrere gleiche Buchstaben am Spielfeld sein.
-//- [ ] ZeichneLetter implementieren
 public class Game {
 
 	private String[][] playfield;
@@ -85,6 +84,7 @@ public class Game {
 				player1.setCard2(card);
 				if (player1.getCard1().equals(player1.getCard2())) {
 					// zwei gleiche
+					System.out.println("Zwei gleiche!");
 					playerPrintLetter();
 					player1.setCard1("*");
 					player1.setCard2("*");
@@ -101,6 +101,7 @@ public class Game {
 						player2.setCard2(card);
 						if (player2.getCard1().equals(player2.getCard2())) {
 							// zwei gleiche
+							System.out.println("Zwei gleiche!");
 							playerPrintLetter();
 							player2.setCard1("*");
 							player2.setCard2("*");
@@ -115,6 +116,7 @@ public class Game {
 	}
 
 	public boolean playerPrintLetter() {
+		new InputField(this);
 		return false;
 	}
 
