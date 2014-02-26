@@ -11,7 +11,6 @@ import erkennung.InputField;
 public class Game {
 
 	private String[][] playfield;
-	private boolean letterFertigGezeichnet = false;
 	Buchstabenerkennung b = new Buchstabenerkennung();
 	Player player1;
 	Player player2;
@@ -73,10 +72,9 @@ public class Game {
 	public void openCard(int height, int width) {
 		String letter = playfield[height][width];
 		new PrintField(letter, this);
-		while(this.letterFertigGezeichnet == false){
-			System.out.println("Ich warte hier :)");
-		}
+		System.out.println("Mal schauen ob ich warte...");
 		setCards(letter);
+		System.out.println("Ich habe nicht gewartet ... :/");
 		sf.setKarte(letter);
 		printPlayerCards();
 	}
@@ -157,10 +155,6 @@ public class Game {
 		System.out.println("Player 1 / Card 2 : " + player1.getCard2());
 		System.out.println("Player 2 / Card 1 : " + player2.getCard1());
 		System.out.println("Player 2 / Card 2 : " + player2.getCard2());
-	}
-	
-	public void setLetterFertigGezeichnet(){
-		this.letterFertigGezeichnet = true;
 	}
 
 	public static void main(String[] args) {
