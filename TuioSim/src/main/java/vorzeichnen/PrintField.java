@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 
-public class PrintField extends JDialog implements KeyListener {
+public class PrintField extends JFrame implements KeyListener {
 
 	private static final long serialVersionUID = 119678133234225947L;
 	private Game game;
@@ -24,21 +24,15 @@ public class PrintField extends JDialog implements KeyListener {
 	private ArrayList<Coordinate> coordinates;
 
 	public PrintField(String letter, Game g) {
-		JFrame frame = new JFrame();
-		frame.setTitle("Hier wird Vorgezeichnet");
-		frame.setSize(450, 450);
-		frame.setLocation(450, 0);
-		frame.setVisible(true);
-		frame.addKeyListener(this);
-		
-		//JDialog dialog = new JDialog(frame, "Mein erster Dialog", true);
-		JDialog dialog = new JDialog(frame);
-		dialog.setModal(true);
-		dialog.setVisible(true);
+		setTitle("Hier wird Vorgezeichnet");
+		setSize(450, 450);
+		setLocation(450, 0);
+		setVisible(true);
+		addKeyListener(this);
 		this.setGame(g);
-		Coordinate c = bs.getConfigStartPosition('G');
-		coordinates = bs.buildLetter(bs.getConfigLetter('G'),
-				bs.getConfigStartPosition('G'));
+		Coordinate c = bs.getConfigStartPosition('Z');
+		coordinates = bs.buildLetter(bs.getConfigLetter('Z'),
+				bs.getConfigStartPosition('Z'));
 		this.tuio = new Rectangle(c.getFirst(), c.getSecond(), 40, 40);
 	}
 
