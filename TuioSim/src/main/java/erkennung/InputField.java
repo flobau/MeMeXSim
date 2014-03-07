@@ -10,6 +10,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
@@ -22,12 +23,15 @@ public class InputField extends JFrame implements MouseMotionListener,
 	private Rectangle tuio;
 	private int difX;
 	private int difY;
+	private ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
+	private String letter;
 
-	public InputField(Game g) {
+	public InputField(Game g, String letter) {
 		setTitle("Hier wird Gezeichnet");
 		setSize(450, 450);
 		setLocation(450, 0);
 		setVisible(false);
+		this.letter = letter;
 		this.tuio = new Rectangle(50, 50, 40, 40);
 		addMouseListener(this);
 		addMouseMotionListener(this);
@@ -57,20 +61,19 @@ public class InputField extends JFrame implements MouseMotionListener,
 		tuio.setLocation(difX + e.getX(), difY + e.getY());
 		repaint();
 	}
+	
+	public void setLetter(String letter){
+		
+	}
 
 	public void keyTyped(KeyEvent e) {
 	}
 
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-			// isOnCard();
+			// Das Fenster soll geschlossen werden und die Zeichnung soll
+			// überprüft werden!
 		}
-	}
-
-	public void keyReleased(KeyEvent e) {
-	}
-
-	public void mouseClicked(MouseEvent e) {
 	}
 
 	public void mousePressed(MouseEvent e) {
@@ -88,16 +91,23 @@ public class InputField extends JFrame implements MouseMotionListener,
 		}
 	}
 
+	public void mouseDragged(MouseEvent e) {
+		updateLocation(e);
+		coordinates.add(new Coordinate((int) tuio.getX(), (int) tuio.getY()));
+	}
+
 	public void mouseEntered(MouseEvent e) {
 	}
 
 	public void mouseExited(MouseEvent e) {
 	}
 
-	public void mouseDragged(MouseEvent e) {
-		updateLocation(e);
+	public void mouseMoved(MouseEvent e) {
 	}
 
-	public void mouseMoved(MouseEvent e) {
+	public void keyReleased(KeyEvent e) {
+	}
+
+	public void mouseClicked(MouseEvent e) {
 	}
 }

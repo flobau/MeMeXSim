@@ -15,7 +15,7 @@ public class Game {
 	Player player1;
 	Player player2;
 	ScoreField sf = null;
-	InputField inf = new InputField(this);
+	InputField inf = new InputField(this, null);
 	boolean same = false;
 
 	/**
