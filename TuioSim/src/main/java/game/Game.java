@@ -15,6 +15,8 @@ public class Game {
 	Player player1;
 	Player player2;
 	ScoreField sf = null;
+	InputField inf = new InputField(this);
+	boolean same = false;
 
 	/**
 	 * buildField erstellt mir die logischen Karten am Spielfeld, dabei
@@ -144,9 +146,14 @@ public class Game {
 	 * Wird ausgeführt wenn ein Spieler zwei gleiche Karten aufdeckt.
 	 * @return
 	 */
-	public boolean playerPrintLetter() {
-		new InputField(this);
-		return false;
+	public void playerPrintLetter() {
+		same = true;
+	}
+	
+	public void setInputFieldVisible(){
+		if(same == true){
+			inf.setVisible(true);
+		}
 	}
 
 	// Nur zu Testzwecken!

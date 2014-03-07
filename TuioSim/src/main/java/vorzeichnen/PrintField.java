@@ -12,7 +12,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 
 public class PrintField extends JFrame implements KeyListener {
@@ -66,6 +65,7 @@ public class PrintField extends JFrame implements KeyListener {
 				coordinates.remove(0);
 			} else {
 				setVisible(false);
+				game.setInputFieldVisible();
 				dispose();
 			}
 		}
