@@ -10,6 +10,9 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -26,13 +29,11 @@ public class InputField extends JFrame implements MouseMotionListener,
 	private ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
 	private String letter;
 
-	public InputField(Game g, String letter) {
+	public InputField(Game g) {
 		setTitle("Hier wird Gezeichnet");
 		setSize(450, 450);
 		setLocation(450, 0);
 		setVisible(false);
-		this.letter = letter;
-		this.tuio = new Rectangle(50, 50, 40, 40);
 		addMouseListener(this);
 		addMouseMotionListener(this);
 		addKeyListener(this);
@@ -41,6 +42,12 @@ public class InputField extends JFrame implements MouseMotionListener,
 	public void paint(Graphics g) {
 		super.paint(g);
 		buildOrUpdateField(g);
+	}
+	
+	public void printTuio(){
+		this.tuio = new Rectangle(
+				getStartPosition(letter.charAt(0)).getFirst(),
+				getStartPosition(letter.charAt(0)).getSecond(), 40, 40);
 	}
 
 	public void buildOrUpdateField(Graphics g) {
@@ -61,17 +68,42 @@ public class InputField extends JFrame implements MouseMotionListener,
 		tuio.setLocation(difX + e.getX(), difY + e.getY());
 		repaint();
 	}
-	
-	public void setLetter(String letter){
+
+	public Coordinate getStartPosition(char letter) {
+		Coordinate c = null;
+		try {
+			FileReader fr = new FileReader(
+					"src/main/resources/letterConfig.txt");
+			BufferedReader br = new BufferedReader(fr);
+			c = new Coordinate();
+			String[] a = null;
+			for (int i = 0; i < 26; i++) {
+				String line = br.readLine();
+				if (line.charAt(0) == letter) {
+					line = (String) line.subSequence(3, 10);
+					a = line.split("/");
+					c.setFirst(Integer.parseInt(a[0]));
+					c.setSecond(Integer.parseInt(a[1]));
+					br.close();
+				}
+			}
+		} catch (IOException e) {
+		}
+		return c;
+	}
+
+	public void setLetter(String letter) {
 		this.letter = letter;
+		printTuio();
 	}
 
 	public void keyTyped(KeyEvent e) {
 	}
 
 	public void keyPressed(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-			System.out.println(this.letter);
+		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+			System.out.println(coordinates.size());
+			setVisible(false);
 			// Das Fenster soll geschlossen werden und die Zeichnung soll
 			// überprüft werden!
 		}

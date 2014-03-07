@@ -15,7 +15,7 @@ public class Game {
 	Player player1;
 	Player player2;
 	ScoreField sf = null;
-	InputField inf = new InputField(this, null);
+	InputField inf = new InputField(this);
 	boolean same = false;
 
 	/**
@@ -155,6 +155,7 @@ public class Game {
 	public void setInputFieldVisible(){
 		if(same == true){
 			inf.setVisible(true);
+			same = false;
 		}
 	}
 
