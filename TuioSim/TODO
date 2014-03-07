@@ -1,6 +1,6 @@
 TODO List:
 
-- [ ] Das zweite Vorzeichnen muss geschehen bevor ich selbst Zeichnen darf
+- [X] Das zweite Vorzeichnen muss geschehen bevor ich selbst Zeichnen darf
 		- Hier könnte das Problem sein, dass es sich nur um einen Thread handelt und nun zwei Threads gemacht werden müssen ...
 		- Sollte am besten vermieden werden da mehrere Threads nur mehr aufwand bedeuten.
 - [ ] Überprüfen das eine mindest Menge an Koordinaten vorhanden ist
