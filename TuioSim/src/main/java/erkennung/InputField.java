@@ -63,7 +63,7 @@ public class InputField extends JFrame implements MouseMotionListener,
 	}
 	
 	public void setLetter(String letter){
-		
+		this.letter = letter;
 	}
 
 	public void keyTyped(KeyEvent e) {
@@ -71,6 +71,7 @@ public class InputField extends JFrame implements MouseMotionListener,
 
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+			System.out.println(this.letter);
 			// Das Fenster soll geschlossen werden und die Zeichnung soll
 			// überprüft werden!
 		}

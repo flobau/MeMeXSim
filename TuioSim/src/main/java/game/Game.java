@@ -112,6 +112,7 @@ public class Game {
 				if (player1.getCard1().equals(player1.getCard2())) {
 					// zwei gleiche
 					System.out.println("Zwei gleiche!");
+					this.inf.setLetter(card);
 					playerPrintLetter();
 					player1.setCard1("*");
 					player1.setCard2("*");
@@ -129,6 +130,7 @@ public class Game {
 						if (player2.getCard1().equals(player2.getCard2())) {
 							// zwei gleiche
 							System.out.println("Zwei gleiche!");
+							this.inf.setLetter(card);
 							playerPrintLetter();
 							player2.setCard1("*");
 							player2.setCard2("*");
