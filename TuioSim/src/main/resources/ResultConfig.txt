@@ -8,7 +8,7 @@ G# NorthWest/West/SouthWest/South/SouthEast/East/NorthEast/North/NorthWest/West
 H# South/North/East/North/South
 I# South
 J# South/SouthWest/West/NorthWest
-K# South/North/NorthEast/SouthWest/SouthEast/NorthWest
+K# South/North/NorthEast/SouthWest/SouthEast
 L# South/East
 M# North/SouthEast/NorthEast/South
 N# North/SouthEast/North

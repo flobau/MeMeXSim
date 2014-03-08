@@ -146,8 +146,8 @@ public class Game {
 			same = false;
 		}
 	}
-	
-	public void checkResult(ArrayList<Coordinate> coordinates, String letter){
+
+	public void checkResult(ArrayList<Coordinate> coordinates, String letter) {
 		boolean richtig = false;
 		Buchstabenerkennung b = new Buchstabenerkennung();
 		b.getCoordinates(coordinates);

@@ -11,7 +11,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -45,8 +47,8 @@ public class InputField extends JFrame implements MouseMotionListener,
 		super.paint(g);
 		buildOrUpdateField(g);
 	}
-	
-	public void printTuio(){
+
+	public void printTuio() {
 		this.tuio = new Rectangle(
 				getStartPosition(letter.charAt(0)).getFirst(),
 				getStartPosition(letter.charAt(0)).getSecond(), 40, 40);
@@ -105,6 +107,7 @@ public class InputField extends JFrame implements MouseMotionListener,
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 			System.out.println("Daten werden verarbeitet...");
+			writeLog();
 			g.checkResult(coordinates, letter);
 			setVisible(false);
 			// Das Fenster soll geschlossen werden und die Zeichnung soll
@@ -145,5 +148,21 @@ public class InputField extends JFrame implements MouseMotionListener,
 	}
 
 	public void mouseClicked(MouseEvent e) {
+	}
+
+	// Nur zu Testzwecken!
+	public void writeLog() {
+		try {
+			BufferedWriter outputWriter = null;
+			outputWriter = new BufferedWriter(new FileWriter(
+					"src/main/resources/log.txt"));
+			for (int i = 0; i < coordinates.size(); i++) {
+				outputWriter.write(coordinates.get(i).toString());
+				outputWriter.newLine();
+			}
+			outputWriter.flush();
+			outputWriter.close();
+		} catch (IOException e) {
+		}
 	}
 }

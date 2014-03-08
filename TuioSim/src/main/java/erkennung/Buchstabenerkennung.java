@@ -39,26 +39,27 @@ public class Buchstabenerkennung {
 		ArrayList<String> parts = new ArrayList<String>();
 		boolean erkannt = false;
 		String[] result = buildResult(letter);
+		// formatCoordinates wird nur benötigt, da wir in der Simulation sind!
+		formatCoordinates();
 		while (allCoordsDone == false) {
 			parts.add(getDirection(makePartsofCoordinates()));
 		}
 
-		// for (int i = 0; i < parts.size(); i++) {
-		// System.out.println(parts.get(i));
-		// }
+		 for (int i = 0; i < parts.size(); i++) {
+		 System.out.println(parts.get(i));
+		 }
 
 		parts = orderSegments(parts);
 
-		// System.out.println("*****");
-		// for (int i = 0; i < parts.size(); i++) {
-		// System.out.println(parts.get(i));
-		// }
+		System.out.println("*****");
+		for (int i = 0; i < parts.size(); i++) {
+			System.out.println(parts.get(i));
+		}
 		//
 		// System.out.println(parts.size());
 		// System.out.println(letter.length);
 
 		// check if there is the same number of parts
-		System.out.println(result.length);
 		if (parts.size() != result.length)
 			return false;
 
@@ -377,11 +378,11 @@ public class Buchstabenerkennung {
 	public String[] buildResult(String letter) {
 		String[] a = null;
 		try {
-			FileReader fr = new FileReader("src/main/resources/ResultConfig.txt");
+			FileReader fr = new FileReader(
+					"src/main/resources/ResultConfig.txt");
 			BufferedReader br = new BufferedReader(fr);
 			for (int i = 0; i < 26; i++) {
 				String line = br.readLine();
-				System.out.println("HUHU");
 				if (line.charAt(0) == letter.charAt(0)) {
 					a = line.split("/");
 					br.close();
@@ -390,5 +391,14 @@ public class Buchstabenerkennung {
 		} catch (IOException e) {
 		}
 		return a;
+	}
+
+	public void formatCoordinates() {
+		for (int i = 0; i < coordinates.size(); i++) {
+			Coordinate c = coordinates.get(i);
+			c.setSecond(450 - c.getSecond());
+			;
+			coordinates.set(i, c);
+		}
 	}
 }
