@@ -1,11 +1,13 @@
 package game;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
 
 import vorzeichnen.PrintField;
 import erkennung.Buchstabenerkennung;
+import erkennung.Coordinate;
 import erkennung.InputField;
 
 public class Game {
@@ -19,12 +21,13 @@ public class Game {
 	boolean same = false;
 
 	/**
-	 * buildField erstellt mir die logischen Karten am Spielfeld, dabei
-	 * wird darauf geachtet, dass jedes Buchstabenpaar nur einmal vorkommen
-	 * darf. Danach wird alles geshuffelt und in einer Liste gespeichert.
+	 * buildField erstellt mir die logischen Karten am Spielfeld, dabei wird
+	 * darauf geachtet, dass jedes Buchstabenpaar nur einmal vorkommen darf.
+	 * Danach wird alles geshuffelt und in einer Liste gespeichert.
+	 * 
 	 * @param height
 	 * @param width
-	 * Die beiden Parameter geben die Kartenanzahl an
+	 *            Die beiden Parameter geben die Kartenanzahl an
 	 */
 	public void buildField(int height, int width) {
 		String[][] field = new String[height][width];
@@ -66,8 +69,9 @@ public class Game {
 	}
 
 	/**
-	 * Deckt die jeweilige Karte (Breite und Länge) auf und setzt
-	 * sie bei dem jeweiligen Spieler der gerade an der Reihe ist.
+	 * Deckt die jeweilige Karte (Breite und Länge) auf und setzt sie bei dem
+	 * jeweiligen Spieler der gerade an der Reihe ist.
+	 * 
 	 * @param height
 	 * @param width
 	 */
@@ -82,24 +86,9 @@ public class Game {
 	}
 
 	/**
-	 * Diese Methode wird aufgerufen wenn das Spiel gestartet wird.
-	 * Es wird das Spielfeld gebaut und die Spieler initialisiert.
-	 */
-	public void initGame() {
-		buildField(4, 4);
-		player1 = new Player();
-		player2 = new Player();
-		player1.setCard1("*");
-		player1.setCard2("*");
-		player2.setCard1("*");
-		player2.setCard2("*");
-		sf = new ScoreField(this);
-		sf.setStatus("Bewegen Sie das TUIO auf eine Karte und drücken Sie SPACE");
-	}
-
-	/**
-	 * Die Methode setzt dem Spieler der gerade an der Reihe ist
-	 * die Karte welche dieser aufgedeckt hat.
+	 * Die Methode setzt dem Spieler der gerade an der Reihe ist die Karte
+	 * welche dieser aufgedeckt hat.
+	 * 
 	 * @param card
 	 */
 	private void setCards(String card) {
@@ -146,17 +135,42 @@ public class Game {
 
 	/**
 	 * Wird ausgeführt wenn ein Spieler zwei gleiche Karten aufdeckt.
+	 * 
 	 * @return
 	 */
 	public void playerPrintLetter() {
 		same = true;
 	}
-	
-	public void setInputFieldVisible(){
-		if(same == true){
+
+	public void setInputFieldVisible() {
+		if (same == true) {
 			inf.setVisible(true);
 			same = false;
 		}
+	}
+	
+	public void checkResult(ArrayList<Coordinate> coordinates, String letter){
+		boolean richtig = false;
+		Buchstabenerkennung b = new Buchstabenerkennung();
+		b.getCoordinates(coordinates);
+		richtig = b.check(letter);
+		System.out.println(richtig);
+	}
+
+	/**
+	 * Diese Methode wird aufgerufen wenn das Spiel gestartet wird. Es wird das
+	 * Spielfeld gebaut und die Spieler initialisiert.
+	 */
+	public void initGame() {
+		buildField(4, 4);
+		player1 = new Player();
+		player2 = new Player();
+		player1.setCard1("*");
+		player1.setCard2("*");
+		player2.setCard1("*");
+		player2.setCard2("*");
+		sf = new ScoreField(this);
+		sf.setStatus("Bewegen Sie das TUIO auf eine Karte und drücken Sie SPACE");
 	}
 
 	// Nur zu Testzwecken!

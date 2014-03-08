@@ -32,9 +32,10 @@ public class Buchstabenerkennung {
 	private boolean allCoordsDone = false;
 	private int count;
 
-	public boolean check(String[] letter) {
+	public boolean check(String letter) {
 		ArrayList<String> parts = new ArrayList<String>();
 		boolean erkannt = false;
+		String[] result = buildResult(letter);
 		while (allCoordsDone == false) {
 			parts.add(getDirection(makePartsofCoordinates()));
 		}
@@ -55,14 +56,14 @@ public class Buchstabenerkennung {
 
 		// check if there is the same number of parts
 
-		if (parts.size() != letter.length)
+		if (parts.size() != result.length)
 			return false;
 
-		for (int i = 0; i < letter.length; i++) {
-			if (parts.get(i).equals(letter[i]) == true) {
+		for (int i = 0; i < result.length; i++) {
+			if (parts.get(i).equals(result[i]) == true) {
 				erkannt = true;
 			}
-			if (parts.get(i).equals(letter[i]) == false) {
+			if (parts.get(i).equals(result[i]) == false) {
 				erkannt = false;
 				return erkannt;
 			}
@@ -367,5 +368,9 @@ public class Buchstabenerkennung {
 
 	public void getCoordinates(ArrayList<Coordinate> coord) {
 		this.coordinates = coord;
+	}
+	
+	public String[] buildResult(String letter){
+		return null;
 	}
 }
