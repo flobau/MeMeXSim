@@ -43,22 +43,22 @@ public class Buchstabenerkennung {
 			parts.add(getDirection(makePartsofCoordinates()));
 		}
 
-		for (int i = 0; i < parts.size(); i++) {
-			System.out.println(parts.get(i));
-		}
+		// for (int i = 0; i < parts.size(); i++) {
+		// System.out.println(parts.get(i));
+		// }
 
 		parts = orderSegments(parts);
 
-		System.out.println("*****");
-		for (int i = 0; i < parts.size(); i++) {
-			System.out.println(parts.get(i));
-		}
+		// System.out.println("*****");
+		// for (int i = 0; i < parts.size(); i++) {
+		// System.out.println(parts.get(i));
+		// }
 		//
 		// System.out.println(parts.size());
 		// System.out.println(letter.length);
 
 		// check if there is the same number of parts
-
+		System.out.println(result.length);
 		if (parts.size() != result.length)
 			return false;
 
@@ -381,6 +381,7 @@ public class Buchstabenerkennung {
 			BufferedReader br = new BufferedReader(fr);
 			for (int i = 0; i < 26; i++) {
 				String line = br.readLine();
+				System.out.println("HUHU");
 				if (line.charAt(0) == letter.charAt(0)) {
 					a = line.split("/");
 					br.close();
