@@ -29,9 +29,9 @@ public class PrintField extends JFrame implements KeyListener {
 		setVisible(true);
 		addKeyListener(this);
 		this.setGame(g);
-		Coordinate c = bs.getConfigStartPosition('Y');
-		coordinates = bs.buildLetter(bs.getConfigLetter('Y'),
-				bs.getConfigStartPosition('Y'));
+		Coordinate c = bs.getConfigStartPosition(letter.charAt(0));
+		coordinates = bs.buildLetter(bs.getConfigLetter(letter.charAt(0)),
+				bs.getConfigStartPosition(letter.charAt(0)));
 		this.tuio = new Rectangle(c.getFirst(), c.getSecond(), 40, 40);
 	}
 
