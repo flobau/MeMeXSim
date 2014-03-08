@@ -1,5 +1,8 @@
 package erkennung;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Buchstabenerkennung {
@@ -119,7 +122,8 @@ public class Buchstabenerkennung {
 		// check if line between start and end point is north
 		if (first.getSecond() <= last.getSecond()
 				&& (last.getSecond() - first.getSecond()) < count
-				&& (Math.abs(first.getFirst() - last.getFirst())) < Math.sqrt(count)) {
+				&& (Math.abs(first.getFirst() - last.getFirst())) < Math
+						.sqrt(count)) {
 			for (int i = 1; i <= coordinates.size() - 2; i++) {
 				if (first.getSecond() <= coordinates.get(i).getSecond()
 						&& coordinates.get(i).getSecond() <= last.getSecond()) {
@@ -369,8 +373,21 @@ public class Buchstabenerkennung {
 	public void getCoordinates(ArrayList<Coordinate> coord) {
 		this.coordinates = coord;
 	}
-	
-	public String[] buildResult(String letter){
-		return null;
+
+	public String[] buildResult(String letter) {
+		String[] a = null;
+		try {
+			FileReader fr = new FileReader("src/main/resources/ResultConfig.txt");
+			BufferedReader br = new BufferedReader(fr);
+			for (int i = 0; i < 26; i++) {
+				String line = br.readLine();
+				if (line.charAt(0) == letter.charAt(0)) {
+					a = line.split("/");
+					br.close();
+				}
+			}
+		} catch (IOException e) {
+		}
+		return a;
 	}
 }

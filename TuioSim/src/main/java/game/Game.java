@@ -78,9 +78,7 @@ public class Game {
 	public void openCard(int height, int width) {
 		String letter = playfield[height][width];
 		new PrintField(letter, this);
-		System.out.println("Mal schauen ob ich warte...");
 		setCards(letter);
-		System.out.println("Ich habe nicht gewartet ... :/");
 		sf.setKarte(letter);
 		printPlayerCards();
 	}

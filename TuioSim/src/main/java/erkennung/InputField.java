@@ -28,6 +28,7 @@ public class InputField extends JFrame implements MouseMotionListener,
 	private int difY;
 	private ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
 	private String letter;
+	private Game g;
 
 	public InputField(Game g) {
 		setTitle("Hier wird Gezeichnet");
@@ -37,6 +38,7 @@ public class InputField extends JFrame implements MouseMotionListener,
 		addMouseListener(this);
 		addMouseMotionListener(this);
 		addKeyListener(this);
+		this.g = g;
 	}
 
 	public void paint(Graphics g) {
@@ -102,7 +104,8 @@ public class InputField extends JFrame implements MouseMotionListener,
 
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-			System.out.println(coordinates.size());
+			System.out.println("Daten werden verarbeitet...");
+			g.checkResult(coordinates, letter);
 			setVisible(false);
 			// Das Fenster soll geschlossen werden und die Zeichnung soll
 			// überprüft werden!
