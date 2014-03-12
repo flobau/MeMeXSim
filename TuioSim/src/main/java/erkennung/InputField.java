@@ -109,7 +109,8 @@ public class InputField extends JFrame implements MouseMotionListener,
 			System.out.println("Daten werden verarbeitet...");
 			writeLog();
 			g.checkResult(coordinates, letter);
-			setVisible(false);
+			this.coordinates.clear();
+			dispose();
 			// Das Fenster soll geschlossen werden und die Zeichnung soll
 			// überprüft werden!
 		}

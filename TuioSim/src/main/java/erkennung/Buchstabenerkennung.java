@@ -122,7 +122,6 @@ public class Buchstabenerkennung {
 
 		// check if line between start and end point is north
 		if (first.getSecond() <= last.getSecond()
-				&& (last.getSecond() - first.getSecond()) < count
 				&& (Math.abs(first.getFirst() - last.getFirst())) < Math
 						.sqrt(count)) {
 			for (int i = 1; i <= coordinates.size() - 2; i++) {
@@ -243,7 +242,6 @@ public class Buchstabenerkennung {
 
 		// check if line between start and end point is south
 		if (first.getSecond() >= last.getSecond()
-				&& (first.getSecond() - last.getSecond() < count)
 				&& (Math.abs(first.getFirst() - last.getFirst())) < 2) {
 			for (int i = 1; i <= coordinates.size() - 2; i++) {
 				if (first.getSecond() >= coordinates.get(i).getSecond()
